@@ -23,4 +23,11 @@ class TicTacToeTests: XCTestCase {
     let testedBox = ticTacToe.getBox(2)
     XCTAssertEqual(testedBox, "O")
   }
+  
+  func test_players_cannot_play_on_a_played_position() {
+    ticTacToe.addSymbol(toBox: 1)
+    ticTacToe.addSymbol(toBox: 1)
+    let testedBox = ticTacToe.getBox(1)
+    XCTAssertEqual(testedBox, "X")
+  }
 }
