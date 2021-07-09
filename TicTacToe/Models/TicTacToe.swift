@@ -9,7 +9,14 @@ enum Symbol: String {
 class TicTacToe {
   
   private var winner: Symbol? = nil
+  
   private var currentSymbol: Symbol = .cross
+  
+  private var board: [String] = [
+    "", "", "",
+    "", "", "",
+    "", "", ""
+  ]
   
   var winnerMessage: String {
     get {
@@ -25,12 +32,6 @@ class TicTacToe {
     }
   }
   
-  var board: [String] = [
-    "", "", "",
-    "", "", "",
-    "", "", ""
-  ]
-  
   func addSymbol(toBox box: Int) {
     let selectedBox = board[box]
     if selectedBox.isEmpty && (winner == nil) {
@@ -42,6 +43,10 @@ class TicTacToe {
   
   func getBox(_ box: Int) -> String {
     board[box]
+  }
+  
+  func boardSize() -> Int {
+    board.count
   }
 }
 

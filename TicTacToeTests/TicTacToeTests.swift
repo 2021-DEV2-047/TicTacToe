@@ -8,9 +8,9 @@ class TicTacToeTests: XCTestCase {
 
   func test_when_game_is_launched_then_the_board_is_initialized() {
     // arrange & act
-    let board = ticTacToe.board
+    let boardSize = ticTacToe.boardSize()
     // assert
-    XCTAssertEqual(board.count, 9)
+    XCTAssertEqual(boardSize, 9)
   }
   
   func test_when_game_started_then_cross_should_begin() {
