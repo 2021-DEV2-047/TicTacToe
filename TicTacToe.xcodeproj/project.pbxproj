@@ -12,6 +12,7 @@
 		9C6D6C762698C7450056DF58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D6C752698C7450056DF58 /* Assets.xcassets */; };
 		9C6D6C792698C7450056DF58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D6C772698C7450056DF58 /* LaunchScreen.storyboard */; };
 		9C6D6C842698C7450056DF58 /* TicTacToeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D6C832698C7450056DF58 /* TicTacToeTests.swift */; };
+		9CD5B1532698CEAF00B1E7B2 /* TicTacToe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD5B1522698CEAF00B1E7B2 /* TicTacToe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		9C6D6C852698C7450056DF58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C6D6C8E2698C7450056DF58 /* TicTacToeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeUITests.swift; sourceTree = "<group>"; };
 		9C6D6C902698C7450056DF58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9CD5B1522698CEAF00B1E7B2 /* TicTacToe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToe.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			children = (
 				9C6D6C6C2698C7430056DF58 /* AppDelegate.swift */,
 				9C6D6C702698C7430056DF58 /* ViewController.swift */,
+				9CD5B1542698CEB900B1E7B2 /* Models */,
 				9C6D6C9C2698C7BB0056DF58 /* Resources */,
 			);
 			path = TicTacToe;
@@ -111,6 +114,14 @@
 				9C6D6C772698C7450056DF58 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		9CD5B1542698CEB900B1E7B2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9CD5B1522698CEAF00B1E7B2 /* TicTacToe.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C6D6C712698C7430056DF58 /* ViewController.swift in Sources */,
+				9CD5B1532698CEAF00B1E7B2 /* TicTacToe.swift in Sources */,
 				9C6D6C6D2698C7430056DF58 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
