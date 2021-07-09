@@ -1,11 +1,5 @@
 import Foundation
 
-enum Symbol: String {
-  case cross = "X"
-  case circle = "O"
-  case nobody
-}
-
 class TicTacToe {
   
   private var winner: Symbol? = nil
@@ -31,6 +25,11 @@ class TicTacToe {
       }
     }
   }
+}
+
+// MARK: - Public Methods
+
+extension TicTacToe {
   
   func addSymbol(toBox box: Int) {
     let selectedBox = board[box]

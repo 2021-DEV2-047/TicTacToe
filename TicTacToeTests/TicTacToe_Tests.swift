@@ -2,7 +2,7 @@ import XCTest
 
 @testable import TicTacToe
 
-class TicTacToeTests: XCTestCase {
+class TicTacToe_Tests: XCTestCase {
   
   let ticTacToe = TicTacToe()
 
