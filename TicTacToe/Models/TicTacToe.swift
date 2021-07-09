@@ -3,6 +3,7 @@ import Foundation
 enum Symbol: String {
   case cross = "X"
   case circle = "O"
+  case nobody
 }
 
 class TicTacToe {
@@ -12,7 +13,15 @@ class TicTacToe {
   
   var winnerMessage: String {
     get {
-      winner != nil ? "\(winner!.rawValue) win the game" : ""
+      guard let _winner = winner else {
+        return ""
+      }
+      switch _winner {
+      case .cross, .circle:
+        return "\(_winner.rawValue) win the game"
+      case .nobody:
+        return "Draw"
+      }
     }
   }
   
@@ -46,6 +55,8 @@ extension TicTacToe {
     
     if userHasWinned {
       winner = currentSymbol
+    } else if gameIsEnded() {
+      winner = .nobody
     }
   }
   
@@ -76,5 +87,18 @@ extension TicTacToe {
     }
     
     return userWin
+  }
+  
+  private func gameIsEnded() -> Bool {
+    var gameIsEnded = true
+    
+    board.forEach { box in
+      if box == "" {
+        gameIsEnded = false
+        return
+      }
+    }
+    
+    return gameIsEnded
   }
 }
