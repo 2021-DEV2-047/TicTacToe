@@ -13,7 +13,14 @@ class TicTacToeTests: XCTestCase {
   
   func test_when_game_started_then_cross_should_begin() {
     ticTacToe.addSymbol(toBox: 1)
-    let firstBox = ticTacToe.getBox(1)
-    XCTAssertEqual(firstBox, "X")
+    let testedBox = ticTacToe.getBox(1)
+    XCTAssertEqual(testedBox, "X")
+  }
+  
+  func test_when_player_has_played_then_symbol_change() {
+    ticTacToe.addSymbol(toBox: 1)
+    ticTacToe.addSymbol(toBox: 2)
+    let testedBox = ticTacToe.getBox(2)
+    XCTAssertEqual(testedBox, "O")
   }
 }
