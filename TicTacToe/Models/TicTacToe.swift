@@ -52,7 +52,10 @@ extension TicTacToe {
     }
     
     let stringArray = currentSymbolBoxes.joined(separator: ",")
-    let winningCombinations = ["0,1,2", "3,4,5", "6,7,8"]
+    let winningCombinations = [
+      "0,1,2", "3,4,5", "6,7,8",
+      "0,3,6", "1,4,7", "2,5,8"
+    ]
     winningCombinations.forEach { (winningCombination) in
       if (stringArray.contains(winningCombination)) {
         _currentSymbol = currentSymbol
