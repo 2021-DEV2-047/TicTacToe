@@ -16,8 +16,11 @@ class TicTacToe {
   ]
   
   func addSymbol(toBox box: Int) {
-    board[box] = currentSymbol.rawValue
-    currentSymbol = (currentSymbol == .cross) ? .circle : .cross
+    let selectedBox = board[box]
+    if selectedBox.isEmpty {
+      board[box] = currentSymbol.rawValue
+      currentSymbol = (currentSymbol == .cross) ? .circle : .cross
+    }
   }
   
   func getBox(_ box: Int) -> String {
