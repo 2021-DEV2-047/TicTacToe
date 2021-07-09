@@ -47,12 +47,24 @@ class TicTacToeTests: XCTestCase {
     ticTacToe.addSymbol(toBox: 3) // O
     ticTacToe.addSymbol(toBox: 1) // X
     ticTacToe.addSymbol(toBox: 4) // O
-    ticTacToe.addSymbol(toBox: 2) // X
     // act
+    ticTacToe.addSymbol(toBox: 2) // X
     ticTacToe.addSymbol(toBox: 5)
     // assert
     let testedBox = ticTacToe.getBox(5)
     XCTAssertEqual(testedBox, "")
+    XCTAssertEqual(ticTacToe.winnerMessage, "X win the game")
+  }
+  
+  func test_when_player_lines_up_three_symbols_vertically_then_he_wins() {
+    // arrange
+    ticTacToe.addSymbol(toBox: 0) // X
+    ticTacToe.addSymbol(toBox: 1) // O
+    ticTacToe.addSymbol(toBox: 3) // X
+    ticTacToe.addSymbol(toBox: 4) // O
+    // act
+    ticTacToe.addSymbol(toBox: 6) // X
+    // assert
     XCTAssertEqual(ticTacToe.winnerMessage, "X win the game")
   }
 }
