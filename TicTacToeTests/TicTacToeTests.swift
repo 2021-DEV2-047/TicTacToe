@@ -79,4 +79,19 @@ class TicTacToeTests: XCTestCase {
     // assert
     XCTAssertEqual(ticTacToe.winnerMessage, "X win the game")
   }
+  
+  func test_when_nobody_win_then_draw_message_should_be_presented() {
+    // arrange & act
+    ticTacToe.addSymbol(toBox: 4) // X
+    ticTacToe.addSymbol(toBox: 0) // O
+    ticTacToe.addSymbol(toBox: 2) // X
+    ticTacToe.addSymbol(toBox: 6) // O
+    ticTacToe.addSymbol(toBox: 3) // X
+    ticTacToe.addSymbol(toBox: 5) // O
+    ticTacToe.addSymbol(toBox: 7) // X
+    ticTacToe.addSymbol(toBox: 1) // O
+    ticTacToe.addSymbol(toBox: 8) // X
+    // assert
+    XCTAssertEqual(ticTacToe.winnerMessage, "Draw")
+  }
 }
