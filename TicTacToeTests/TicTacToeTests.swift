@@ -41,7 +41,7 @@ class TicTacToeTests: XCTestCase {
     XCTAssertEqual(testedBox, "X")
   }
   
-  func test_when_the_player_lines_up_three_symbols_horizontally_then_he_wins() {
+  func test_when_the_player_lines_up_three_symbols_horizontally_then_he_wins_and_the_other_player_cannot_play() {
     // arrange
     ticTacToe.addSymbol(toBox: 0) // X
     ticTacToe.addSymbol(toBox: 3) // O
@@ -53,5 +53,6 @@ class TicTacToeTests: XCTestCase {
     // assert
     let testedBox = ticTacToe.getBox(5)
     XCTAssertEqual(testedBox, "")
+    XCTAssertEqual(ticTacToe.winnerMessage, "X win the game")
   }
 }
