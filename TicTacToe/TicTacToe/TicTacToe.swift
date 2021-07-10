@@ -15,8 +15,9 @@ class TicTacToe {
   ]
   
   private var currentSymbol: Symbol = .cross
+  
   private var winner: Symbol? = nil
-  private var userHasWinned = false
+  private var userHasWon = false
   
   private var alertMessage: String = ""
   
@@ -32,7 +33,7 @@ class TicTacToe {
 extension TicTacToe {
   
   func addSymbol(toBox box: Int) {
-    if userHasWinned || boardIsFilled() {
+    if userHasWon || boardIsFilled() {
       alertMessage = "The game is over, start a new game."
       return
     }
@@ -67,9 +68,9 @@ extension TicTacToe {
   
   private func processBoard() {
     let playerCombinations = getPlayerCombinations()
-    userHasWinned = verifyIfUserHasWinned(with: playerCombinations)
+    userHasWon = verifyIfUserHasWon(with: playerCombinations)
     
-    if userHasWinned {
+    if userHasWon {
       winner = currentSymbol
     } else if boardIsFilled() {
       winner = Symbol.none
@@ -77,17 +78,12 @@ extension TicTacToe {
   }
   
   private func getPlayerCombinations() -> String {
-    var currentSymbolBoxes: [String] = []
-    board.enumerated().forEach { (index, box) in
-      if (box == currentSymbol.rawValue) {
-        let indexString = String(index)
-        currentSymbolBoxes.append(indexString)
-      }
-    }
-    return currentSymbolBoxes.joined(separator: ",")
+    board.enumerated().compactMap { (index, box) -> String? in
+      (box == currentSymbol.rawValue) ? String(index) : nil
+    }.joined(separator: ",")
   }
   
-  private func verifyIfUserHasWinned(with combinations: String) -> Bool {
+  private func verifyIfUserHasWon(with combinations: String) -> Bool {
     winningCombinations.first(where: { combinations.contains($0) }) != nil
   }
   
@@ -100,10 +96,10 @@ extension TicTacToe {
       return ""
     }
     switch _winner {
-    case .cross, .circle:
-      return "\(_winner.rawValue) win the game"
+    case .circle, .cross:
+      return "\(_winner.rawValue) win the game."
     case .none:
-      return "Draw"
+      return "Draw."
     }
   }
 }

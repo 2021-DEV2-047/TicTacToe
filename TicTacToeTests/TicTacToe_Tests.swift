@@ -54,7 +54,7 @@ class TicTacToe_Tests: XCTestCase {
     // assert
     let testedBox = ticTacToe.getBox(5)
     XCTAssertEqual(testedBox, "")
-    XCTAssertEqual(ticTacToe.winnerMessage, "X win the game")
+    XCTAssertEqual(ticTacToe.winnerMessage, "X win the game.")
   }
   
   func test_when_player_lines_up_three_symbols_vertically_then_he_wins() {
@@ -66,7 +66,7 @@ class TicTacToe_Tests: XCTestCase {
     // act
     ticTacToe.addSymbol(toBox: 6) // X
     // assert
-    XCTAssertEqual(ticTacToe.winnerMessage, "X win the game")
+    XCTAssertEqual(ticTacToe.winnerMessage, "X win the game.")
   }
   
   func test_when_player_make_a_diagonal_then_he_wins() {
@@ -78,14 +78,14 @@ class TicTacToe_Tests: XCTestCase {
     // act
     ticTacToe.addSymbol(toBox: 8) // X
     // assert
-    XCTAssertEqual(ticTacToe.winnerMessage, "X win the game")
+    XCTAssertEqual(ticTacToe.winnerMessage, "X win the game.")
   }
   
   func test_when_nobody_win_then_draw_message_should_be_presented() {
     // arrange & act
     givenDrawGame()
     // assert
-    XCTAssertEqual(ticTacToe.winnerMessage, "Draw")
+    XCTAssertEqual(ticTacToe.winnerMessage, "Draw.")
   }
   
   func test_when_game_is_finished_and_player_plays_then_retry_game_message_is_displayed() {
