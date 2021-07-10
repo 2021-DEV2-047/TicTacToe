@@ -83,6 +83,24 @@ class TicTacToe_Tests: XCTestCase {
   
   func test_when_nobody_win_then_draw_message_should_be_presented() {
     // arrange & act
+    givenDrawGame()
+    // assert
+    XCTAssertEqual(ticTacToe.winnerMessage, "Draw")
+  }
+  
+  func test_when_game_is_finished_and_player_plays_then_retry_game_message_is_displayed() {
+    // arrange & act
+    givenDrawGame()
+    // assert
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "0The game is over, start a new game")
+  }
+}
+
+// MARK: - Convenience Methods
+
+extension TicTacToe_Tests {
+  
+  private func givenDrawGame() {
     ticTacToe.addSymbol(toBox: 4) // X
     ticTacToe.addSymbol(toBox: 0) // O
     ticTacToe.addSymbol(toBox: 2) // X
@@ -92,7 +110,5 @@ class TicTacToe_Tests: XCTestCase {
     ticTacToe.addSymbol(toBox: 7) // X
     ticTacToe.addSymbol(toBox: 1) // O
     ticTacToe.addSymbol(toBox: 8) // X
-    // assert
-    XCTAssertEqual(ticTacToe.winnerMessage, "Draw")
   }
 }
