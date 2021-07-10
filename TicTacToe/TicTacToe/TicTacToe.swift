@@ -2,9 +2,11 @@ import Foundation
 
 class TicTacToe {
   
-  private var winner: Symbol? = nil
-  
   private var currentSymbol: Symbol = .cross
+  private var winner: Symbol? = nil
+  private var userHasWinned = false
+  
+  private var alertMessage: String = ""
   
   private var board: [String] = [
     "", "", "",
@@ -33,10 +35,12 @@ extension TicTacToe {
   
   func addSymbol(toBox box: Int) {
     let selectedBox = board[box]
-    if selectedBox.isEmpty && (winner == nil) {
+    if selectedBox.isEmpty && !userHasWinned {
       board[box] = currentSymbol.rawValue
       processBoard()
       currentSymbol = (currentSymbol == .cross) ? .circle : .cross
+    } else {
+      alertMessage = "You cannot play on a played position !"
     }
   }
   
@@ -47,6 +51,10 @@ extension TicTacToe {
   func boardSize() -> Int {
     board.count
   }
+  
+  func getAlertMessage() -> String {
+    alertMessage
+  }
 }
 
 // MARK: - Convenience Methods
@@ -55,7 +63,7 @@ extension TicTacToe {
   
   private func processBoard() {
     let playerCombinations = getPlayerCombinations()
-    let userHasWinned = verify(playerCombinations)
+    userHasWinned = verify(playerCombinations)
     
     if userHasWinned {
       winner = currentSymbol

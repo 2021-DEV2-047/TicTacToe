@@ -39,7 +39,7 @@ class TicTacToe_Tests: XCTestCase {
     // assert
     let testedBox = ticTacToe.getBox(0)
     XCTAssertEqual(testedBox, "X")
-    XCTAssertEqual(ticTacToe.alertMessage, "You cannot play on a played position !")
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "You cannot play on a played position !")
   }
   
   func test_when_the_player_lines_up_three_symbols_horizontally_then_he_wins_and_the_other_player_cannot_play() {
