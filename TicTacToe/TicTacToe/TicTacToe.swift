@@ -34,19 +34,20 @@ class TicTacToe {
 extension TicTacToe {
   
   func addSymbol(toBox box: Int) {
-    if userHasWinned || gameIsEnded() {
+    if userHasWinned || boardIsFilled() {
       alertMessage = "The game is over, start a new game"
       return
     }
     
     let selectedBox = board[box]
-    if selectedBox.isEmpty {
-      board[box] = currentSymbol.rawValue
-      processBoard()
-      currentSymbol = (currentSymbol == .cross) ? .circle : .cross
-    } else {
+    guard selectedBox.isEmpty else {
       alertMessage = "You cannot play on a played position !"
+      return
     }
+    
+    board[box] = currentSymbol.rawValue
+    processBoard()
+    currentSymbol = (currentSymbol == .cross) ? .circle : .cross
   }
   
   func getBox(_ box: Int) -> String {
@@ -72,7 +73,7 @@ extension TicTacToe {
     
     if userHasWinned {
       winner = currentSymbol
-    } else if gameIsEnded() {
+    } else if boardIsFilled() {
       winner = .nobody
     }
   }
@@ -106,16 +107,7 @@ extension TicTacToe {
     return userWin
   }
   
-  private func gameIsEnded() -> Bool {
-    var gameIsEnded = true
-    
-    board.forEach { box in
-      if box == "" {
-        gameIsEnded = false
-        return
-      }
-    }
-    
-    return gameIsEnded
+  private func boardIsFilled() -> Bool {
+    board.first(where: { $0 == "" }) == nil
   }
 }
