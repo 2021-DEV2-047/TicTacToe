@@ -94,7 +94,7 @@ class TicTacToe_Tests: XCTestCase {
     // act
     ticTacToe.addSymbol(toBox: 4)
     // assert
-    XCTAssertEqual(ticTacToe.getAlertMessage(), "The game is over, start a new game")
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "The game is over, start a new game.")
   }
 }
 

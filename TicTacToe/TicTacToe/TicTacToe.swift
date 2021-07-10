@@ -1,12 +1,12 @@
 import Foundation
 
 class TicTacToe {
-  
-  private var currentSymbol: Symbol = .cross
-  private var winner: Symbol? = nil
-  private var userHasWinned = false
-  
-  private var alertMessage: String = ""
+
+  private let winningCombinations = [
+    "0,1,2", "3,4,5", "6,7,8",
+    "0,3,6", "1,4,7", "2,5,8",
+    "0,4,8", "2,4,7"
+  ]
   
   private var board: [String] = [
     "", "", "",
@@ -14,17 +14,15 @@ class TicTacToe {
     "", "", ""
   ]
   
+  private var currentSymbol: Symbol = .cross
+  private var winner: Symbol? = nil
+  private var userHasWinned = false
+  
+  private var alertMessage: String = ""
+  
   var winnerMessage: String {
     get {
-      guard let _winner = winner else {
-        return ""
-      }
-      switch _winner {
-      case .cross, .circle:
-        return "\(_winner.rawValue) win the game"
-      case .nobody:
-        return "Draw"
-      }
+      TicTacToe.getMessage(for: winner)
     }
   }
 }
@@ -35,7 +33,7 @@ extension TicTacToe {
   
   func addSymbol(toBox box: Int) {
     if userHasWinned || boardIsFilled() {
-      alertMessage = "The game is over, start a new game"
+      alertMessage = "The game is over, start a new game."
       return
     }
     
@@ -69,12 +67,12 @@ extension TicTacToe {
   
   private func processBoard() {
     let playerCombinations = getPlayerCombinations()
-    userHasWinned = verify(playerCombinations)
+    userHasWinned = verifyIfUserHasWinned(with: playerCombinations)
     
     if userHasWinned {
       winner = currentSymbol
     } else if boardIsFilled() {
-      winner = .nobody
+      winner = Symbol.none
     }
   }
   
@@ -89,25 +87,23 @@ extension TicTacToe {
     return currentSymbolBoxes.joined(separator: ",")
   }
   
-  private func verify(_ combinations: String) -> Bool {
-    var userWin = false
-    
-    let winningCombinations = [
-      "0,1,2", "3,4,5", "6,7,8",
-      "0,3,6", "1,4,7", "2,5,8",
-      "0,4,8", "2,4,7"
-    ]
-    winningCombinations.forEach { (winningCombination) in
-      if (combinations.contains(winningCombination)) {
-        userWin = true
-        return
-      }
-    }
-    
-    return userWin
+  private func verifyIfUserHasWinned(with combinations: String) -> Bool {
+    winningCombinations.first(where: { combinations.contains($0) }) != nil
   }
   
   private func boardIsFilled() -> Bool {
     board.first(where: { $0 == "" }) == nil
+  }
+  
+  private static func getMessage(for winner: Symbol?) -> String {
+    guard let _winner = winner else {
+      return ""
+    }
+    switch _winner {
+    case .cross, .circle:
+      return "\(_winner.rawValue) win the game"
+    case .none:
+      return "Draw"
+    }
   }
 }
