@@ -89,10 +89,12 @@ class TicTacToe_Tests: XCTestCase {
   }
   
   func test_when_game_is_finished_and_player_plays_then_retry_game_message_is_displayed() {
-    // arrange & act
+    // arrange
     givenDrawGame()
+    // act
+    ticTacToe.addSymbol(toBox: 4)
     // assert
-    XCTAssertEqual(ticTacToe.getAlertMessage(), "0The game is over, start a new game")
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "The game is over, start a new game")
   }
 }
 

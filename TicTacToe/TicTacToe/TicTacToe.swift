@@ -34,8 +34,13 @@ class TicTacToe {
 extension TicTacToe {
   
   func addSymbol(toBox box: Int) {
+    if userHasWinned || gameIsEnded() {
+      alertMessage = "The game is over, start a new game"
+      return
+    }
+    
     let selectedBox = board[box]
-    if selectedBox.isEmpty && !userHasWinned {
+    if selectedBox.isEmpty {
       board[box] = currentSymbol.rawValue
       processBoard()
       currentSymbol = (currentSymbol == .cross) ? .circle : .cross
