@@ -1,5 +1,6 @@
 import RxCocoa
 import RxSwift
+import UIKit
 import XCTest
 
 @testable import TicTacToe
@@ -129,6 +130,13 @@ class TicTacToe_Tests: XCTestCase {
     XCTAssertEqual(ticTacToe.alertMessage.value, "X has to play")
     ticTacToe.addSymbol(toBox: 2)
     XCTAssertEqual(ticTacToe.alertMessage.value, "O has to play")
+  }
+  
+  func test_alert_message_should_have_right_attributes() {
+    // arrange, act & assert
+    let attributes: [NSAttributedString.Key: Any] = [.foregroundColor : Colors.blue]
+    let attributedString = NSAttributedString(string: "The X begin", attributes: attributes)
+    XCTAssertEqual(ticTacToe.alertMessage.value, attributedString)
   }
 }
 
