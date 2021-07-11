@@ -145,6 +145,18 @@ class TicTacToe_Tests: XCTestCase {
     attributedString = NSAttributedString(string: "X has to play", attributes: Symbol.cross.attributes)
     XCTAssertEqual(ticTacToe.alertMessage.value, attributedString)
   }
+  
+  func test_retry_the_game_should_reset_the_board() {
+    // arrange
+    givenDrawGame()
+    // act
+    ticTacToe.resetGame()
+    // assert
+    for index in 0...ticTacToe.boardSize() - 1 {
+      XCTAssertEqual(ticTacToe.getBox(index), "")
+    }
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "The X begin")
+  }
 }
 
 // MARK: - Convenience Methods
