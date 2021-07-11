@@ -7,7 +7,6 @@ class GameViewController: UIViewController {
   
   private let alertLabel = UILabel()
   private let gridContainer = UIView()
-  private var boxImageViews: [UIImageView] = []
   private var separators: [UIView] = []
   private let tapGesture = UITapGestureRecognizer()
   
@@ -76,11 +75,25 @@ extension GameViewController {
   
   private func setUpBindings() {
     vm.alertMessage.bind(to: alertLabel.rx.text).disposed(by: bag)
+    
+    vm.board.subscribe { board in
+      guard let _board = board.element else { return }
+      _board.enumerated().forEach { (index, value) in
+        if value == "X" {
+          self.vm.boxImageViewsRelay.value[index].image = R.image.game.cross()
+        } else if value == "O" {
+          self.vm.boxImageViewsRelay.value[index].image = R.image.game.circle()
+        }
+      }
+    }.disposed(by: bag)
   }
   
   @objc
   private func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-    print(sender?.location(in: gridContainer))
+    guard let point = sender?.location(in: gridContainer) else {
+      return
+    }
+    vm.didTappedGrid(at: point)
   }
 }
 
@@ -121,10 +134,8 @@ extension GameViewController {
   }
   
   private func setUpBoxImageViewFrames() {
-    for i in 0...8 {
-      let boxFrame = vm.getBox(at: i)
-      let imageView = UIImageView()
-      imageView.frame = boxFrame
+    vm.setUpBoxImageViews()
+    for imageView in vm.boxImageViewsRelay.value {
       gridContainer.addSubview(imageView)
     }
   }
