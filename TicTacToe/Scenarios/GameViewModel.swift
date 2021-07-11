@@ -17,24 +17,14 @@ extension GameViewModel {
   func setUpBoxFrames(from frame: CGRect) {
     let boxWidth = frame.width / 3
     let boxHeight = frame.height / 3
+    let ordinates = [0, boxHeight, boxHeight * 2]
+    let abscissas = [0, boxWidth, boxWidth * 2]
     
-    let firstBox = CGRect(x: 0, y: 0, width: boxWidth, height: boxHeight)
-    let secondBox = CGRect(x: boxWidth, y: 0, width: boxWidth, height: boxHeight)
-    let thirdBox = CGRect(x: boxWidth * 2, y: 0, width: boxWidth, height: boxHeight)
-    
-    let fourthBox = CGRect(x: 0, y: boxHeight, width: boxWidth, height: boxHeight)
-    let fifthBox = CGRect(x: boxWidth, y: boxHeight, width: boxWidth, height: boxHeight)
-    let sixthBox = CGRect(x: boxWidth * 2, y: boxHeight, width: boxWidth, height: boxHeight)
-    
-    let seventhBox = CGRect(x: 0, y: boxHeight * 2, width: boxWidth, height: boxHeight)
-    let eighthBox = CGRect(x: boxWidth, y: boxHeight * 2, width: boxWidth, height: boxHeight)
-    let ninthBox = CGRect(x: boxWidth * 2, y: boxHeight * 2, width: boxWidth, height: boxHeight)
-    
-    
-    [firstBox, secondBox, thirdBox,
-     fourthBox, fifthBox, sixthBox,
-     seventhBox, eighthBox, ninthBox].forEach {
-      boxFrames.append($0)
+    ordinates.forEach { y in
+      abscissas.forEach { x in
+        let boxFrame = CGRect(x: x, y: y, width: boxWidth, height: boxHeight)
+        boxFrames.append(boxFrame)
+      }
     }
   }
   

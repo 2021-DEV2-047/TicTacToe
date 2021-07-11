@@ -7,6 +7,7 @@ class GameViewController: UIViewController {
   
   private let alertLabel = UILabel()
   private let gridContainer = UIView()
+  private var boxImageViews: [UIImageView] = []
   private var separators: [UIView] = []
   private let tapGesture = UITapGestureRecognizer()
   
@@ -28,6 +29,8 @@ class GameViewController: UIViewController {
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     setUpConstraintsForSeparators()
+    vm.setUpBoxFrames(from: gridContainer.frame)
+    setUpBoxImageViewFrames()
   }
 }
 
@@ -74,16 +77,16 @@ extension GameViewController {
   private func setUpBindings() {
     vm.alertMessage.bind(to: alertLabel.rx.text).disposed(by: bag)
   }
-}
-
-// MARK: - Convenience Methods
-
-extension GameViewController {
   
   @objc
   private func handleTap(_ sender: UITapGestureRecognizer? = nil) {
     print(sender?.location(in: gridContainer))
   }
+}
+
+// MARK: - Convenience Methods
+
+extension GameViewController {
   
   private func setUpConstraintsForSeparators() {
     let gridWidth = gridContainer.frame.width
@@ -114,6 +117,15 @@ extension GameViewController {
       default:
         break
       }
+    }
+  }
+  
+  private func setUpBoxImageViewFrames() {
+    for i in 0...8 {
+      let boxFrame = vm.getBox(at: i)
+      let imageView = UIImageView()
+      imageView.frame = boxFrame
+      gridContainer.addSubview(imageView)
     }
   }
 }
