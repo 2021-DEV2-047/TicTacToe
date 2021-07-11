@@ -10,6 +10,8 @@ class GameViewController: UIViewController {
   private let gridContainer = UIView()
   private var separators: [UIView] = []
   private let tapGesture = UITapGestureRecognizer()
+  private let buttonContainer = UIView()
+  private let resetButton = UIButton()
   
   private let bag = DisposeBag()
   private let vm = GameViewModel()
@@ -31,6 +33,8 @@ class GameViewController: UIViewController {
     setUpConstraintsForSeparators()
     vm.setUpBoxFrames(from: gridContainer.frame)
     setUpBoxImageViewFrames()
+    
+    resetButton.layer.cornerRadius = resetButton.frame.height / 2
   }
 }
 
@@ -56,10 +60,16 @@ extension GameViewController {
     
     gridContainer.layer.borderWidth = 1
     gridContainer.layer.borderColor = UIColor.black.cgColor
-    let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-    gridContainer.addGestureRecognizer(tap)
-    
     view.addSubview(gridContainer)
+    
+    let attributedString = NSAttributedString(
+      string: R.string.ticTacToe.retry(),
+      attributes: [.foregroundColor: UIColor.white, .font: Fonts.defaultBoldFont]
+    )
+    resetButton.backgroundColor = Colors.red
+    resetButton.setAttributedTitle(attributedString, for: .normal)
+    buttonContainer.addSubview(resetButton)
+    view.addSubview(buttonContainer)
   }
   
   private func setUpConstraints() {
@@ -80,6 +90,18 @@ extension GameViewController {
       $0.height.equalTo(gridContainer.snp.width)
       $0.centerX.centerY.equalToSuperview()
     }
+    
+    buttonContainer.snp.makeConstraints {
+      $0.top.equalTo(gridContainer.snp.bottom)
+      $0.left.right.equalToSuperview()
+      $0.bottom.equalTo(view.safeAreaLayoutGuide)
+    }
+    
+    resetButton.snp.makeConstraints {
+      $0.width.equalToSuperview().dividedBy(3)
+      $0.height.equalTo(45)
+      $0.centerY.centerX.equalToSuperview()
+    }
   }
   
   private func setUpBindings() {
@@ -93,18 +115,28 @@ extension GameViewController {
         self.vm.boxImageViewsRelay.value[index].image = image
       }
     }.disposed(by: bag)
-  }
-  
-  @objc
-  private func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-    guard let point = sender?.location(in: gridContainer) else { return }
-    vm.didTappedGrid(at: point)
+    
+    let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+    gridContainer.addGestureRecognizer(tap)
+    
+    resetButton.addTarget(self, action: #selector(resetGame), for: .touchUpInside)
   }
 }
 
 // MARK: - Convenience Methods
 
 extension GameViewController {
+  
+  @objc
+  private func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+    guard let point = sender?.location(in: gridContainer) else { return }
+    vm.didTappedGrid(at: point)
+  }
+  
+  @objc
+  private func resetGame() {
+    
+  }
   
   private func setUpConstraintsForSeparators() {
     let gridWidth = gridContainer.frame.width

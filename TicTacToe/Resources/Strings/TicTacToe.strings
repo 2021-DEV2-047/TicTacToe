@@ -3,3 +3,4 @@
 "symbolHasToPlay" = "%@ has to play";
 "symbolWinTheGame" = "%@ win the game";
 "draw" = "Draw. The game is over, start a new game";
+"retry" = "Retry";

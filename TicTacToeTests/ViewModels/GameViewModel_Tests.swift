@@ -9,6 +9,7 @@ class GameViewModel_Tests: XCTestCase {
   
   private let alertMessage = BehaviorRelay<NSAttributedString>(value: NSAttributedString(string: ""))
   private let boxImageViewsRelay = BehaviorRelay<[UIImageView]>(value: [])
+  private let retryButtonIsVisibleRelay = BehaviorRelay<Bool>(value: false)
   
   private let bag = DisposeBag()
   private let vm = GameViewModel()
@@ -39,7 +40,6 @@ class GameViewModel_Tests: XCTestCase {
     // arrange
     subscribe()
     givenPreparedGrid()
-    givenPreparedBoxImageViews()
     
     // act
     let tappedLocation = CGPoint(x: 0.2, y: 0.6)
@@ -47,8 +47,88 @@ class GameViewModel_Tests: XCTestCase {
     
     // assert
     XCTAssertEqual(alertMessage.value.string, "O has to play")
-    let arrayShouldBe = getBoxImageViewsTestedArray(with: R.image.game.cross(), at: 0)
-    XCTAssertEqual(boxImageViewsRelay.value, arrayShouldBe)
+    let array: [UIImage?] = [
+      R.image.game.cross(), nil, nil,
+      nil, nil, nil,
+      nil, nil, nil,
+    ]
+    let arrayShouldBe = getImageViewArray(from: array)
+    
+    for (index, boxImageView) in boxImageViewsRelay.value.enumerated() {
+      let testedImageView = arrayShouldBe[index].image
+      XCTAssertEqual(boxImageView.image, testedImageView)
+    }
+  }
+  
+  func test_when_a_game_is_finished_then_retrieve_button_should_be_visible() {
+    // arrange
+    subscribe()
+    givenPreparedGrid()
+    
+    // act
+    XCTAssertEqual(retryButtonIsVisibleRelay.value, false)
+    var tappedLocation = CGPoint(x: 0.2, y: 0.6) // X
+    vm.didTappedGrid(at: tappedLocation)
+    // assert
+    XCTAssertEqual(retryButtonIsVisibleRelay.value, false)
+    
+    // act
+    tappedLocation = CGPoint(x: 1.2, y: 0.6) // O
+    vm.didTappedGrid(at: tappedLocation)
+    tappedLocation = CGPoint(x: 0.2, y: 1.6) // X
+    vm.didTappedGrid(at: tappedLocation)
+    tappedLocation = CGPoint(x: 1.2, y: 1.6) // O
+    vm.didTappedGrid(at: tappedLocation)
+    tappedLocation = CGPoint(x: 0.2, y: 2.6) // X
+    vm.didTappedGrid(at: tappedLocation)
+    // assert
+    XCTAssertEqual(alertMessage.value.string, "X win the game")
+    XCTAssertEqual(retryButtonIsVisibleRelay.value, true)
+  }
+  
+  func test_when_a_game_is_finished_then_retry_button_should_clean_the_board() {
+    // arrange
+    subscribe()
+    givenPreparedGrid()
+    
+    // act
+    var tappedLocation = CGPoint(x: 0.2, y: 0.6) // X
+    vm.didTappedGrid(at: tappedLocation)
+    tappedLocation = CGPoint(x: 1.2, y: 0.6) // O
+    vm.didTappedGrid(at: tappedLocation)
+    tappedLocation = CGPoint(x: 0.2, y: 1.6) // X
+    vm.didTappedGrid(at: tappedLocation)
+    tappedLocation = CGPoint(x: 1.2, y: 1.6) // O
+    vm.didTappedGrid(at: tappedLocation)
+    tappedLocation = CGPoint(x: 0.2, y: 2.6) // X
+    vm.didTappedGrid(at: tappedLocation)
+    
+    var images: [UIImage?] = [
+      R.image.game.cross(), R.image.game.circle(), nil,
+      R.image.game.cross(), R.image.game.circle(), nil,
+      R.image.game.cross(), nil, nil
+    ]
+    var arrayShouldBe = getImageViewArray(from: images)
+    
+    for (index, boxImageView) in boxImageViewsRelay.value.enumerated() {
+      let testedImageView = arrayShouldBe[index].image
+      XCTAssertEqual(boxImageView.image, testedImageView)
+    }
+    
+    vm.resetGame()
+    
+    // assert
+    images = [
+      nil, nil, nil,
+      nil, nil, nil,
+      nil, nil, nil
+    ]
+    arrayShouldBe = getImageViewArray(from: images)
+    
+    for (index, boxImageView) in boxImageViewsRelay.value.enumerated() {
+      let testedImageView = arrayShouldBe[index].image
+      XCTAssertEqual(boxImageView.image, testedImageView)
+    }
   }
 }
 
@@ -59,22 +139,26 @@ extension GameViewModel_Tests {
   private func givenPreparedGrid() {
     let gridContainerFrame = CGRect(x: 0, y: 0, width: 3, height: 3)
     vm.setUpBoxFrames(from: gridContainerFrame)
-  }
-  
-  private func givenPreparedBoxImageViews() {
     vm.setUpBoxImageViews()
   }
   
-  private func getBoxImageViewsTestedArray(with image: UIImage?, at row: Int) -> [UIImageView] {
-    var arrayShouldBe = boxImageViewsRelay.value
-    let imageView = arrayShouldBe[row]
-    imageView.image = image
-    arrayShouldBe[row] = imageView
-    return arrayShouldBe
+  private func getImageViewArray(from images: [UIImage?]) -> [UIImageView] {
+    return images.map { image -> UIImageView in UIImageView(image: image) }
   }
   
   private func subscribe() {
     vm.alertMessage.bind(to: alertMessage).disposed(by: bag)
+    
+    vm.board.subscribe { event in
+      guard let _board = event.element else { return }
+      _board.enumerated().forEach { (index, value) in
+        if value.isEmpty { return }
+        let image = (value == Symbol.cross.rawValue) ? R.image.game.cross() : R.image.game.circle()
+        self.vm.boxImageViewsRelay.value[index].image = image
+      }
+    }.disposed(by: bag)
+    
     vm.boxImageViewsRelay.bind(to: boxImageViewsRelay).disposed(by: bag)
+    vm.retryButtonIsHidden.bind(to: retryButtonIsVisibleRelay).disposed(by: bag)
   }
 }
