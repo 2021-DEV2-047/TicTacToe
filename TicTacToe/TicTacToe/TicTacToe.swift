@@ -61,6 +61,15 @@ extension TicTacToe {
   func boardSize() -> Int {
     board.value.count
   }
+  
+  func resetGame() {
+    alertMessage.accept(attributedString)
+    var newBoard = board.value
+    for (index, _) in newBoard.enumerated() {
+      newBoard[index] = ""
+    }
+    board.accept(newBoard)
+  }
 }
 
 // MARK: - Convenience Methods
