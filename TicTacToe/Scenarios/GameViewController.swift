@@ -76,14 +76,12 @@ extension GameViewController {
   private func setUpBindings() {
     vm.alertMessage.bind(to: alertLabel.rx.text).disposed(by: bag)
     
-    vm.board.subscribe { board in
-      guard let _board = board.element else { return }
+    vm.board.subscribe { event in
+      guard let _board = event.element else { return }
       _board.enumerated().forEach { (index, value) in
-        if value == "X" {
-          self.vm.boxImageViewsRelay.value[index].image = R.image.game.cross()
-        } else if value == "O" {
-          self.vm.boxImageViewsRelay.value[index].image = R.image.game.circle()
-        }
+        if value.isEmpty { return }
+        let image = value == "X" ? R.image.game.cross() : R.image.game.circle()
+        self.vm.boxImageViewsRelay.value[index].image = image
       }
     }.disposed(by: bag)
   }
