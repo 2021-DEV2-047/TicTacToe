@@ -14,18 +14,11 @@ class TicTacToe {
     "", "", ""
   ]
   
-  private var currentSymbol: Symbol = .cross
-  
-  private var winner: Symbol? = nil
-  private var userHasWon = false
-  
   private var alertMessage: String = ""
   
-  var winnerMessage: String {
-    get {
-      TicTacToe.getMessage(for: winner)
-    }
-  }
+  private var currentSymbol: Symbol = .cross
+  private var winner: Symbol? = nil
+  private var userHasWon = false
 }
 
 // MARK: - Public Methods
@@ -33,8 +26,7 @@ class TicTacToe {
 extension TicTacToe {
   
   func addSymbol(toBox box: Int) {
-    if userHasWon || boardIsFilled() {
-      alertMessage = "The game is over, start a new game."
+    if theGameIsEnded() {
       return
     }
     
@@ -46,6 +38,11 @@ extension TicTacToe {
     
     board[box] = currentSymbol.rawValue
     processBoard()
+    
+    if theGameIsEnded() {
+      return
+    }
+    
     currentSymbol = (currentSymbol == .cross) ? .circle : .cross
   }
   
@@ -91,7 +88,15 @@ extension TicTacToe {
     board.first(where: { $0 == "" }) == nil
   }
   
-  private static func getMessage(for winner: Symbol?) -> String {
+  private func theGameIsEnded() -> Bool {
+    if userHasWon || boardIsFilled() {
+      alertMessage = getMessage(for: winner)
+      return true
+    }
+    return false
+  }
+  
+  private func getMessage(for winner: Symbol?) -> String {
     guard let _winner = winner else {
       return "The game is not yet over !"
     }
@@ -99,7 +104,7 @@ extension TicTacToe {
     case .circle, .cross:
       return "\(_winner.rawValue) win the game."
     case .none:
-      return "Draw."
+      return "Draw. The game is over, start a new game."
     }
   }
 }

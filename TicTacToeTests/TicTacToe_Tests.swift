@@ -54,7 +54,7 @@ class TicTacToe_Tests: XCTestCase {
     // assert
     let testedBox = ticTacToe.getBox(5)
     XCTAssertEqual(testedBox, "")
-    XCTAssertEqual(ticTacToe.winnerMessage, "X win the game.")
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "X win the game.")
   }
   
   func test_when_player_lines_up_three_symbols_vertically_then_he_wins() {
@@ -66,7 +66,7 @@ class TicTacToe_Tests: XCTestCase {
     // act
     ticTacToe.addSymbol(toBox: 6) // X
     // assert
-    XCTAssertEqual(ticTacToe.winnerMessage, "X win the game.")
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "X win the game.")
   }
   
   func test_when_player_make_a_diagonal_then_he_wins() {
@@ -78,14 +78,14 @@ class TicTacToe_Tests: XCTestCase {
     // act
     ticTacToe.addSymbol(toBox: 8) // X
     // assert
-    XCTAssertEqual(ticTacToe.winnerMessage, "X win the game.")
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "X win the game.")
   }
   
   func test_when_nobody_win_then_draw_message_should_be_presented() {
     // arrange & act
     givenDrawGame()
     // assert
-    XCTAssertEqual(ticTacToe.winnerMessage, "Draw.")
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "Draw. The game is over, start a new game.")
   }
   
   func test_when_game_is_finished_and_player_plays_then_retry_game_message_is_displayed() {
@@ -94,14 +94,7 @@ class TicTacToe_Tests: XCTestCase {
     // act
     ticTacToe.addSymbol(toBox: 4)
     // assert
-    XCTAssertEqual(ticTacToe.getAlertMessage(), "The game is over, start a new game.")
-  }
-  
-  func test_when_the_winnerMessage_is_requested_during_an_ongoing_game_then_the_message_must_be_explicit() {
-    // arrange & act
-    ticTacToe.addSymbol(toBox: 0) // X
-    // assert
-    XCTAssertEqual(ticTacToe.winnerMessage, "The game is not yet over !")
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "Draw. The game is over, start a new game.")
   }
 }
 
