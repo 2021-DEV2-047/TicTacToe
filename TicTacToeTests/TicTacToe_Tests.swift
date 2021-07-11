@@ -96,6 +96,21 @@ class TicTacToe_Tests: XCTestCase {
     // assert
     XCTAssertEqual(ticTacToe.getAlertMessage(), "Draw. The game is over, start a new game.")
   }
+  
+  func test_when_player_has_played_then_alert_message_display_the_next_player() {
+    // arrange, act & assert
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "The X begin.")
+    ticTacToe.addSymbol(toBox: 0)
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "O has to play.")
+    ticTacToe.addSymbol(toBox: 3)
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "X has to play.")
+    ticTacToe.addSymbol(toBox: 1)
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "O has to play.")
+    ticTacToe.addSymbol(toBox: 4)
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "X has to play.")
+    ticTacToe.addSymbol(toBox: 2)
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "X win the game.")
+  }
 }
 
 // MARK: - Convenience Methods
