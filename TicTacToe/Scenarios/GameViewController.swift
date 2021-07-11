@@ -51,7 +51,8 @@ extension GameViewController {
     gridContainer.layer.cornerRadius = 8
     gridContainer.layer.borderWidth = 1
     gridContainer.layer.borderColor = UIColor.black.cgColor
-    gridContainer.addGestureRecognizer(tapGesture)
+    let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+    gridContainer.addGestureRecognizer(tap)
     
     view.addSubview(gridContainer)
   }
@@ -78,6 +79,11 @@ extension GameViewController {
 // MARK: - Convenience Methods
 
 extension GameViewController {
+  
+  @objc
+  private func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+    print(sender?.location(in: gridContainer))
+  }
   
   private func setUpConstraintsForSeparators() {
     let gridWidth = gridContainer.frame.width
