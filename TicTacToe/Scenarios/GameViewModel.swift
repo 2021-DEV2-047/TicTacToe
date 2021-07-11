@@ -34,15 +34,10 @@ extension GameViewModel {
   }
   
   func setUpBoxImageViews() {
-    var _boxImageViews: [UIImageView] = []
-    
-    for i in 0...8 {
-      let boxFrame = getBoxFrame(at: i)
-      let imageView = UIImageView()
-      imageView.frame = boxFrame
-      _boxImageViews.append(imageView)
+    let _boxImageViews = (0...ticTacToe.boardSize() - 1).map { (index) -> UIImageView in
+      let boxFrame = getBoxFrame(at: index)
+      return UIImageView(frame: boxFrame)
     }
-    
     boxImageViewsRelay.accept(_boxImageViews)
   }
   
@@ -51,8 +46,12 @@ extension GameViewModel {
   }
   
   func didTappedGrid(at location: CGPoint) {
-    let index = boxFrames.enumerated().first(where: { $1.contains(location) }).map { $0.offset }
-    guard let _index = index else { return }
-    ticTacToe.addSymbol(toBox: _index)
+    let index = boxFrames.enumerated().first(where: { (index, boxFrame) in
+      boxFrame.contains(location)
+    }).map { element in element.offset }
+    
+    if let _index = index {
+      ticTacToe.addSymbol(toBox: _index)
+    }
   }
 }

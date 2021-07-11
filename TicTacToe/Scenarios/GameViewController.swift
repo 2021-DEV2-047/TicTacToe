@@ -38,8 +38,10 @@ class GameViewController: UIViewController {
 extension GameViewController {
   
   private func setUpViews() {
-    view.backgroundColor = .white
+    view.backgroundColor = Colors.lightGray
     
+    alertLabel.textColor = .black
+    alertLabel.numberOfLines = 0
     alertLabel.textAlignment = .center
     view.addSubview(alertLabel)
     
@@ -50,7 +52,7 @@ extension GameViewController {
       separator.backgroundColor = .black
       gridContainer.addSubview(separator)
     }
-    gridContainer.layer.cornerRadius = 8
+    
     gridContainer.layer.borderWidth = 1
     gridContainer.layer.borderColor = UIColor.black.cgColor
     let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
@@ -80,7 +82,7 @@ extension GameViewController {
       guard let _board = event.element else { return }
       _board.enumerated().forEach { (index, value) in
         if value.isEmpty { return }
-        let image = value == "X" ? R.image.game.cross() : R.image.game.circle()
+        let image = (value == Symbol.cross.rawValue) ? R.image.game.cross() : R.image.game.circle()
         self.vm.boxImageViewsRelay.value[index].image = image
       }
     }.disposed(by: bag)
@@ -88,9 +90,7 @@ extension GameViewController {
   
   @objc
   private func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-    guard let point = sender?.location(in: gridContainer) else {
-      return
-    }
+    guard let point = sender?.location(in: gridContainer) else { return }
     vm.didTappedGrid(at: point)
   }
 }
@@ -104,8 +104,7 @@ extension GameViewController {
     let gridHeight = gridContainer.frame.height
     
     for (index, separator) in separators.enumerated() {
-      switch index {
-      case 0, 1:
+      if (index == 0 || index == 1) {
         separator.snp.makeConstraints {
           $0.width.equalTo(1)
           $0.top.bottom.equalToSuperview()
@@ -115,7 +114,8 @@ extension GameViewController {
             $0.right.equalToSuperview().offset(-(gridWidth / 3))
           }
         }
-      case 2, 3:
+      }
+      if (index == 2 || index == 3) {
         separator.snp.makeConstraints {
           $0.height.equalTo(1)
           $0.left.right.equalToSuperview()
@@ -125,8 +125,6 @@ extension GameViewController {
             $0.bottom.equalToSuperview().offset(-(gridHeight / 3))
           }
         }
-      default:
-        break
       }
     }
   }

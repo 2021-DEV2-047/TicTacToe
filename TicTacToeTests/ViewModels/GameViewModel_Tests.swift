@@ -13,12 +13,11 @@ class GameViewModel_Tests: XCTestCase {
   private let bag = DisposeBag()
   private let vm = GameViewModel()
   
-  func test_initialize_game_view_model() {
+  func test_when_game_is_initialized_then_alert_message_should_be_set() {
     // arrange
     subscribe()
     // act & assert
-    XCTAssertNotNil(vm)
-    XCTAssertEqual(alertMessage.value, "The X begin.")
+    XCTAssertEqual(alertMessage.value, "The X begin")
   }
   
   func test_when_game_is_initialized_then_box_frames_should_be_prepared() {
@@ -47,7 +46,7 @@ class GameViewModel_Tests: XCTestCase {
     vm.didTappedGrid(at: tappedLocation)
     
     // assert
-    XCTAssertEqual(alertMessage.value, "O has to play.")
+    XCTAssertEqual(alertMessage.value, "O has to play")
     let arrayShouldBe = getBoxImageViewsTestedArray(with: R.image.game.cross(), at: 0)
     XCTAssertEqual(boxImageViewsRelay.value, arrayShouldBe)
   }

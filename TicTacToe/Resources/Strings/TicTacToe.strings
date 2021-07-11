@@ -1,0 +1,5 @@
+"xBegin" = "The X begin";
+"cannotPlayOnSamePosition" = "You can't play on a played position !";
+"symbolHasToPlay" = "%@ has to play";
+"symbolWinTheGame" = "%@ win the game";
+"draw" = "Draw. The game is over, start a new game";

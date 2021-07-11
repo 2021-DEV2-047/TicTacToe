@@ -16,7 +16,7 @@ class TicTacToe {
     "", "", ""
   ])
   
-  var alertMessage = BehaviorRelay<String>(value: "The X begin.")
+  var alertMessage = BehaviorRelay<String>(value: R.string.ticTacToe.xBegin())
   
   private var currentSymbol: Symbol = .cross
   private var winner: Symbol? = nil
@@ -28,13 +28,11 @@ class TicTacToe {
 extension TicTacToe {
   
   func addSymbol(toBox box: Int) {
-    if theGameIsEnded() {
-      return
-    }
+    if theGameIsEnded() { return }
     
     let selectedBox = board.value[box]
     guard selectedBox.isEmpty else {
-      alertMessage.accept("You cannot play on a played position !")
+      alertMessage.accept(R.string.ticTacToe.cannotPlayOnSamePosition())
       return
     }
     
@@ -44,12 +42,10 @@ extension TicTacToe {
     
     processBoard()
     
-    if theGameIsEnded() {
-      return
-    }
+    if theGameIsEnded() { return }
     
     currentSymbol = (currentSymbol == .cross) ? .circle : .cross
-    alertMessage.accept("\(currentSymbol.rawValue) has to play.")
+    alertMessage.accept(R.string.ticTacToe.symbolHasToPlay(currentSymbol.rawValue))
   }
   
   func getBox(_ box: Int) -> String {
@@ -58,10 +54,6 @@ extension TicTacToe {
   
   func boardSize() -> Int {
     board.value.count
-  }
-  
-  func getAlertMessage() -> String {
-    alertMessage.value
   }
 }
 
@@ -104,9 +96,9 @@ extension TicTacToe {
   private func getMessage(for winner: Symbol) -> String {
     switch winner {
     case .circle, .cross:
-      return "\(winner.rawValue) win the game."
+      return R.string.ticTacToe.symbolWinTheGame(winner.rawValue)
     case .none:
-      return "Draw. The game is over, start a new game."
+      return R.string.ticTacToe.draw()
     }
   }
 }
