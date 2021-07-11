@@ -9,11 +9,11 @@ enum Symbol: String {
   var attributes: [NSAttributedString.Key: Any] {
     switch self {
     case .cross:
-      return [.foregroundColor: Colors.blue]
+      return [.foregroundColor: Colors.blue, .font: UIFont.systemFont(ofSize: 17, weight: .bold)]
     case .circle:
-      return [.foregroundColor: Colors.red]
+      return [.foregroundColor: Colors.red, .font: UIFont.systemFont(ofSize: 17, weight: .bold)]
     case .none:
-      return [.foregroundColor: UIColor.black]
+      return [.foregroundColor: UIColor.black, .font: UIFont.systemFont(ofSize: 17, weight: .bold)]
     }
   }
 }

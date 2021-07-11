@@ -5,6 +5,7 @@ import SnapKit
 
 class GameViewController: UIViewController {
   
+  private let alertContainer = UIView()
   private let alertLabel = UILabel()
   private let gridContainer = UIView()
   private var separators: [UIView] = []
@@ -40,10 +41,10 @@ extension GameViewController {
   private func setUpViews() {
     view.backgroundColor = Colors.lightGray
     
-    alertLabel.textColor = .black
     alertLabel.numberOfLines = 0
     alertLabel.textAlignment = .center
-    view.addSubview(alertLabel)
+    alertContainer.addSubview(alertLabel)
+    view.addSubview(alertContainer)
     
     for _ in 1...4 {
       separators.append(UIView())
@@ -62,10 +63,16 @@ extension GameViewController {
   }
   
   private func setUpConstraints() {
+    alertContainer.snp.makeConstraints {
+      $0.top.equalTo(view.safeAreaLayoutGuide)
+      $0.left.right.equalToSuperview()
+      $0.bottom.equalTo(gridContainer.snp.top)
+    }
+    
     alertLabel.snp.makeConstraints {
       $0.left.equalToSuperview().offset(16)
       $0.right.equalToSuperview().offset(-16)
-      $0.bottom.equalTo(gridContainer.snp.top).offset(-32)
+      $0.centerY.equalToSuperview()
     }
     
     gridContainer.snp.makeConstraints {
