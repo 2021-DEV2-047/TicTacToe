@@ -10,6 +10,7 @@ class GameViewModel {
   private var boxFrames: [CGRect] = []
   
   var boxImageViewsRelay = BehaviorRelay<[UIImageView]>(value: [])
+  var retryButtonIsHidden = BehaviorRelay<Bool>(value: true)
   
   var board: Observable<[String]> { ticTacToe.board.asObservable() }
   var alertMessage: Observable<NSAttributedString> { ticTacToe.alertMessage.asObservable() }
@@ -53,5 +54,10 @@ extension GameViewModel {
     if let _index = index {
       ticTacToe.addSymbol(toBox: _index)
     }
+  }
+  
+  func resetGame() {
+    ticTacToe.resetGame()
+    setUpBoxImageViews()
   }
 }

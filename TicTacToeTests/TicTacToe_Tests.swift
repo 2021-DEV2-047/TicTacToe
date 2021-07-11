@@ -157,6 +157,14 @@ class TicTacToe_Tests: XCTestCase {
     }
     XCTAssertEqual(ticTacToe.alertMessage.value.string, "The X begin")
   }
+  
+  func test_when_a_game_is_finished_then_reset_button_should_be_visible() {
+    // arrange & act
+    XCTAssertEqual(ticTacToe.resetButtonIsHidden.value, true)
+    givenDrawGame()
+    // assert
+    XCTAssertEqual(ticTacToe.resetButtonIsHidden.value, false)
+  }
 }
 
 // MARK: - Convenience Methods

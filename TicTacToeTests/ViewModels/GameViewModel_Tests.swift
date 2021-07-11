@@ -60,17 +60,17 @@ class GameViewModel_Tests: XCTestCase {
     }
   }
   
-  func test_when_a_game_is_finished_then_retrieve_button_should_be_visible() {
+  func test_when_a_game_is_finished_then_reset_button_should_be_visible() {
     // arrange
     subscribe()
     givenPreparedGrid()
     
     // act
-    XCTAssertEqual(retryButtonIsVisibleRelay.value, false)
+    XCTAssertEqual(retryButtonIsVisibleRelay.value, true)
     var tappedLocation = CGPoint(x: 0.2, y: 0.6) // X
     vm.didTappedGrid(at: tappedLocation)
     // assert
-    XCTAssertEqual(retryButtonIsVisibleRelay.value, false)
+    XCTAssertEqual(retryButtonIsVisibleRelay.value, true)
     
     // act
     tappedLocation = CGPoint(x: 1.2, y: 0.6) // O
@@ -83,7 +83,7 @@ class GameViewModel_Tests: XCTestCase {
     vm.didTappedGrid(at: tappedLocation)
     // assert
     XCTAssertEqual(alertMessage.value.string, "X win the game")
-    XCTAssertEqual(retryButtonIsVisibleRelay.value, true)
+    XCTAssertEqual(retryButtonIsVisibleRelay.value, false)
   }
   
   func test_when_a_game_is_finished_then_retry_button_should_clean_the_board() {
