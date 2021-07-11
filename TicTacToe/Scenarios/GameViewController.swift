@@ -1,6 +1,8 @@
 import UIKit
 
-class ViewController: UIViewController {
+class GameViewController: UIViewController {
+  
+  let vm = GameViewModel()
 
   override func viewDidLoad() {
     super.viewDidLoad()
