@@ -111,6 +111,21 @@ class TicTacToe_Tests: XCTestCase {
     ticTacToe.addSymbol(toBox: 2)
     XCTAssertEqual(ticTacToe.getAlertMessage(), "X win the game.")
   }
+  
+  func test_when_cross_do_a_certain_combination_then_he_should_not_win() {
+    // arrange, act & assert
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "The X begin.")
+    ticTacToe.addSymbol(toBox: 7)
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "O has to play.")
+    ticTacToe.addSymbol(toBox: 8)
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "X has to play.")
+    ticTacToe.addSymbol(toBox: 4)
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "O has to play.")
+    ticTacToe.addSymbol(toBox: 5)
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "X has to play.")
+    ticTacToe.addSymbol(toBox: 2)
+    XCTAssertEqual(ticTacToe.getAlertMessage(), "O has to play.")
+  }
 }
 
 // MARK: - Convenience Methods
