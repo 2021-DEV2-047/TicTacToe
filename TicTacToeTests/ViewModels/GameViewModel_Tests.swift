@@ -7,7 +7,7 @@ import XCTest
 
 class GameViewModel_Tests: XCTestCase {
   
-  private let alertMessage = BehaviorRelay<String>(value: "")
+  private let alertMessage = BehaviorRelay<NSAttributedString>(value: NSAttributedString(string: ""))
   private let boxImageViewsRelay = BehaviorRelay<[UIImageView]>(value: [])
   
   private let bag = DisposeBag()
@@ -17,7 +17,7 @@ class GameViewModel_Tests: XCTestCase {
     // arrange
     subscribe()
     // act & assert
-    XCTAssertEqual(alertMessage.value, "The X begin")
+    XCTAssertEqual(alertMessage.value.string, "The X begin")
   }
   
   func test_when_game_is_initialized_then_box_frames_should_be_prepared() {
@@ -46,7 +46,7 @@ class GameViewModel_Tests: XCTestCase {
     vm.didTappedGrid(at: tappedLocation)
     
     // assert
-    XCTAssertEqual(alertMessage.value, "O has to play")
+    XCTAssertEqual(alertMessage.value.string, "O has to play")
     let arrayShouldBe = getBoxImageViewsTestedArray(with: R.image.game.cross(), at: 0)
     XCTAssertEqual(boxImageViewsRelay.value, arrayShouldBe)
   }

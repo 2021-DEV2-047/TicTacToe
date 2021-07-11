@@ -76,7 +76,7 @@ extension GameViewController {
   }
   
   private func setUpBindings() {
-    vm.alertMessage.bind(to: alertLabel.rx.text).disposed(by: bag)
+    vm.alertMessage.bind(to: alertLabel.rx.attributedText).disposed(by: bag)
     
     vm.board.subscribe { event in
       guard let _board = event.element else { return }

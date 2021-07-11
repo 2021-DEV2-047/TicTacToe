@@ -8,7 +8,7 @@ import XCTest
 class TicTacToe_Tests: XCTestCase {
   
   private let ticTacToe = TicTacToe()
-  private var alertMessage = BehaviorRelay<String>(value: "")
+  private var alertMessage = BehaviorRelay<NSAttributedString>(value: NSAttributedString(string: ""))
   private let bag = DisposeBag()
 
   func test_when_game_is_launched_then_the_board_is_initialized() {
@@ -44,7 +44,7 @@ class TicTacToe_Tests: XCTestCase {
     // assert
     let testedBox = ticTacToe.getBox(0)
     XCTAssertEqual(testedBox, "X")
-    XCTAssertEqual(ticTacToe.alertMessage.value, "You cannot play on a played position !")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "You can't play on a played position !")
   }
   
   func test_when_the_player_lines_up_three_symbols_horizontally_then_he_wins_and_the_other_player_cannot_play() {
@@ -59,7 +59,7 @@ class TicTacToe_Tests: XCTestCase {
     // assert
     let testedBox = ticTacToe.getBox(5)
     XCTAssertEqual(testedBox, "")
-    XCTAssertEqual(ticTacToe.alertMessage.value, "X win the game")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "X win the game")
   }
   
   func test_when_player_lines_up_three_symbols_vertically_then_he_wins() {
@@ -71,7 +71,7 @@ class TicTacToe_Tests: XCTestCase {
     // act
     ticTacToe.addSymbol(toBox: 6) // X
     // assert
-    XCTAssertEqual(ticTacToe.alertMessage.value, "X win the game")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "X win the game")
   }
   
   func test_when_player_make_a_diagonal_then_he_wins() {
@@ -83,14 +83,14 @@ class TicTacToe_Tests: XCTestCase {
     // act
     ticTacToe.addSymbol(toBox: 8) // X
     // assert
-    XCTAssertEqual(ticTacToe.alertMessage.value, "X win the game")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "X win the game")
   }
   
   func test_when_nobody_win_then_draw_message_should_be_presented() {
     // arrange & act
     givenDrawGame()
     // assert
-    XCTAssertEqual(ticTacToe.alertMessage.value, "Draw. The game is over, start a new game")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "Draw. The game is over, start a new game")
   }
   
   func test_when_game_is_finished_and_player_plays_then_retry_game_message_is_displayed() {
@@ -99,43 +99,50 @@ class TicTacToe_Tests: XCTestCase {
     // act
     ticTacToe.addSymbol(toBox: 4)
     // assert
-    XCTAssertEqual(ticTacToe.alertMessage.value, "Draw. The game is over, start a new game")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "Draw. The game is over, start a new game")
   }
   
   func test_when_player_has_played_then_alert_message_display_the_next_player() {
     // arrange, act & assert
-    XCTAssertEqual(ticTacToe.alertMessage.value, "The X begin")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "The X begin")
     ticTacToe.addSymbol(toBox: 0)
-    XCTAssertEqual(ticTacToe.alertMessage.value, "O has to play")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "O has to play")
     ticTacToe.addSymbol(toBox: 3)
-    XCTAssertEqual(ticTacToe.alertMessage.value, "X has to play")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "X has to play")
     ticTacToe.addSymbol(toBox: 1)
-    XCTAssertEqual(ticTacToe.alertMessage.value, "O has to play")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "O has to play")
     ticTacToe.addSymbol(toBox: 4)
-    XCTAssertEqual(ticTacToe.alertMessage.value, "X has to play")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "X has to play")
     ticTacToe.addSymbol(toBox: 2)
-    XCTAssertEqual(ticTacToe.alertMessage.value, "X win the game")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "X win the game")
   }
   
   func test_when_user_do_a_certain_combination_then_he_should_not_win() {
     // arrange, act & assert
-    XCTAssertEqual(ticTacToe.alertMessage.value, "The X begin")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "The X begin")
     ticTacToe.addSymbol(toBox: 7)
-    XCTAssertEqual(ticTacToe.alertMessage.value, "O has to play")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "O has to play")
     ticTacToe.addSymbol(toBox: 8)
-    XCTAssertEqual(ticTacToe.alertMessage.value, "X has to play")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "X has to play")
     ticTacToe.addSymbol(toBox: 4)
-    XCTAssertEqual(ticTacToe.alertMessage.value, "O has to play")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "O has to play")
     ticTacToe.addSymbol(toBox: 5)
-    XCTAssertEqual(ticTacToe.alertMessage.value, "X has to play")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "X has to play")
     ticTacToe.addSymbol(toBox: 2)
-    XCTAssertEqual(ticTacToe.alertMessage.value, "O has to play")
+    XCTAssertEqual(ticTacToe.alertMessage.value.string, "O has to play")
   }
   
   func test_alert_message_should_have_right_attributes() {
     // arrange, act & assert
-    let attributes: [NSAttributedString.Key: Any] = [.foregroundColor : Colors.blue]
-    let attributedString = NSAttributedString(string: "The X begin", attributes: attributes)
+    var attributedString = NSAttributedString(string: "The X begin", attributes: Symbol.cross.attributes)
+    XCTAssertEqual(ticTacToe.alertMessage.value, attributedString)
+    
+    ticTacToe.addSymbol(toBox: 0)
+    attributedString = NSAttributedString(string: "O has to play", attributes: Symbol.circle.attributes)
+    XCTAssertEqual(ticTacToe.alertMessage.value, attributedString)
+    
+    ticTacToe.addSymbol(toBox: 1)
+    attributedString = NSAttributedString(string: "X has to play", attributes: Symbol.cross.attributes)
     XCTAssertEqual(ticTacToe.alertMessage.value, attributedString)
   }
 }

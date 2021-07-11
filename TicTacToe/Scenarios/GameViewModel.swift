@@ -12,7 +12,7 @@ class GameViewModel {
   var boxImageViewsRelay = BehaviorRelay<[UIImageView]>(value: [])
   
   var board: Observable<[String]> { ticTacToe.board.asObservable() }
-  var alertMessage: Observable<String> { ticTacToe.alertMessage.asObservable() }
+  var alertMessage: Observable<NSAttributedString> { ticTacToe.alertMessage.asObservable() }
 }
 
 // MARK: - Convenience Methods

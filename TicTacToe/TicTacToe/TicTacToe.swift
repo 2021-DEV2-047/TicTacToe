@@ -16,7 +16,8 @@ class TicTacToe {
     "", "", ""
   ])
   
-  var alertMessage = BehaviorRelay<String>(value: R.string.ticTacToe.xBegin())
+  private let attributedString = NSAttributedString(string: R.string.ticTacToe.xBegin(), attributes: Symbol.cross.attributes)
+  lazy var alertMessage = BehaviorRelay<NSAttributedString>(value: attributedString)
   
   private var currentSymbol: Symbol = .cross
   private var winner: Symbol? = nil
@@ -32,7 +33,9 @@ extension TicTacToe {
     
     let selectedBox = board.value[box]
     guard selectedBox.isEmpty else {
-      alertMessage.accept(R.string.ticTacToe.cannotPlayOnSamePosition())
+      let stringValue = R.string.ticTacToe.cannotPlayOnSamePosition()
+      let attributedString = NSAttributedString(string: stringValue, attributes: Symbol.none.attributes)
+      alertMessage.accept(attributedString)
       return
     }
     
@@ -45,7 +48,10 @@ extension TicTacToe {
     if theGameIsEnded() { return }
     
     currentSymbol = (currentSymbol == .cross) ? .circle : .cross
-    alertMessage.accept(R.string.ticTacToe.symbolHasToPlay(currentSymbol.rawValue))
+    
+    let stringValue = R.string.ticTacToe.symbolHasToPlay(currentSymbol.rawValue)
+    let attributedString = NSAttributedString(string: stringValue, attributes: currentSymbol.attributes)
+    alertMessage.accept(attributedString)
   }
   
   func getBox(_ box: Int) -> String {
@@ -93,12 +99,16 @@ extension TicTacToe {
     return true
   }
   
-  private func getMessage(for winner: Symbol) -> String {
+  private func getMessage(for winner: Symbol) -> NSAttributedString {
+    var stringValue = ""
+    
     switch winner {
     case .circle, .cross:
-      return R.string.ticTacToe.symbolWinTheGame(winner.rawValue)
+      stringValue = R.string.ticTacToe.symbolWinTheGame(winner.rawValue)
     case .none:
-      return R.string.ticTacToe.draw()
+      stringValue = R.string.ticTacToe.draw()
     }
+    
+    return NSAttributedString(string: stringValue, attributes: winner.attributes)
   }
 }
