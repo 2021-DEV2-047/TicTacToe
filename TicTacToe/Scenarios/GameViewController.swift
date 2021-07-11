@@ -1,4 +1,6 @@
 import UIKit
+import RxCocoa
+import RxSwift
 import SnapKit
 
 class GameViewController: UIViewController {
@@ -8,12 +10,14 @@ class GameViewController: UIViewController {
   private var separators: [UIView] = []
   private let tapGesture = UITapGestureRecognizer()
   
-  let vm = GameViewModel()
+  private let bag = DisposeBag()
+  private let vm = GameViewModel()
 
   override func viewDidLoad() {
     super.viewDidLoad()
     setUpViews()
     setUpConstraints()
+    setUpBindings()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -34,6 +38,7 @@ extension GameViewController {
   private func setUpViews() {
     view.backgroundColor = .white
     
+    alertLabel.textAlignment = .center
     view.addSubview(alertLabel)
     
     for _ in 1...4 {
@@ -47,21 +52,26 @@ extension GameViewController {
     gridContainer.layer.borderWidth = 1
     gridContainer.layer.borderColor = UIColor.black.cgColor
     gridContainer.addGestureRecognizer(tapGesture)
+    
     view.addSubview(gridContainer)
   }
   
   private func setUpConstraints() {
     alertLabel.snp.makeConstraints {
-      $0.top.equalTo(view.safeAreaLayoutGuide).offset(16)
       $0.left.equalToSuperview().offset(16)
       $0.right.equalToSuperview().offset(-16)
+      $0.bottom.equalTo(gridContainer.snp.top).offset(-32)
     }
     
     gridContainer.snp.makeConstraints {
-      $0.width.equalTo(UIScreen.main.bounds.width - 32)
+      $0.left.right.equalTo(alertLabel)
       $0.height.equalTo(gridContainer.snp.width)
       $0.centerX.centerY.equalToSuperview()
     }
+  }
+  
+  private func setUpBindings() {
+    vm.alertMessage.bind(to: alertLabel.rx.text).disposed(by: bag)
   }
 }
 

@@ -4,11 +4,13 @@ use_frameworks!
 
 target 'TicTacToe' do
   pod 'R.swift'
-  pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'RxSwift'
   pod 'SnapKit'
 end
 
 target 'TicTacToeTests' do
   pod 'RxBlocking'
+  pod 'RxCocoa'
+  pod 'RxSwift'
 end

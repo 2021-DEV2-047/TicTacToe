@@ -1,4 +1,6 @@
 import Foundation
+import RxCocoa
+import RxSwift
 
 class TicTacToe {
 
@@ -14,7 +16,7 @@ class TicTacToe {
     "", "", ""
   ]
   
-  private var alertMessage: String = "The X begin."
+  var alertMessage = BehaviorRelay<String>(value: "The X begin.")
   
   private var currentSymbol: Symbol = .cross
   private var winner: Symbol? = nil
@@ -32,7 +34,7 @@ extension TicTacToe {
     
     let selectedBox = board[box]
     guard selectedBox.isEmpty else {
-      alertMessage = "You cannot play on a played position !"
+      alertMessage.accept("You cannot play on a played position !")
       return
     }
     
@@ -44,7 +46,7 @@ extension TicTacToe {
     }
     
     currentSymbol = (currentSymbol == .cross) ? .circle : .cross
-    alertMessage = "\(currentSymbol.rawValue) has to play."
+    alertMessage.accept("\(currentSymbol.rawValue) has to play.")
   }
   
   func getBox(_ box: Int) -> String {
@@ -56,7 +58,7 @@ extension TicTacToe {
   }
   
   func getAlertMessage() -> String {
-    alertMessage
+    alertMessage.value
   }
 }
 
@@ -91,7 +93,8 @@ extension TicTacToe {
   
   private func theGameIsEnded() -> Bool {
     guard let winner = winner else { return false }
-    alertMessage = getMessage(for: winner)
+    let message = getMessage(for: winner)
+    alertMessage.accept(message)
     return true
   }
   
