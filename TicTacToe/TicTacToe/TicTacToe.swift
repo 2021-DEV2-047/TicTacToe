@@ -93,7 +93,7 @@ extension TicTacToe {
   
   private static func getMessage(for winner: Symbol?) -> String {
     guard let _winner = winner else {
-      return ""
+      return "The game is not yet over !"
     }
     switch _winner {
     case .circle, .cross:

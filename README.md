@@ -29,9 +29,9 @@ The player who succeeds in placing three of their marks in a diagonal, horizonta
     - Diagonal row
   - When nobody win then it's a draw and a message is displayed
   - When the game is finished and players try to play, then retry game message is displayed
+  - When the winnerMessage is requested while the game is not finished, then the message is "The game is not yet over !".
 
 # Build
 
 Tests are included inside TicTacToe_Tests.swift and test the TicTacToe.swift class.
 If you want to build all the tests, press command + U : ⌘ + U
-
