@@ -14,7 +14,7 @@ class TicTacToe {
     "", "", ""
   ]
   
-  private var alertMessage: String = ""
+  private var alertMessage: String = "The X begin."
   
   private var currentSymbol: Symbol = .cross
   private var winner: Symbol? = nil
@@ -44,6 +44,7 @@ extension TicTacToe {
     }
     
     currentSymbol = (currentSymbol == .cross) ? .circle : .cross
+    alertMessage = "\(currentSymbol.rawValue) has to play."
   }
   
   func getBox(_ box: Int) -> String {
