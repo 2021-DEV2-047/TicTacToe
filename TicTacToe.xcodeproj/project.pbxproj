@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1FA072B30973B114DF534EFB /* Pods_TicTacToeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C841583C560CE0BCA4DB792 /* Pods_TicTacToeTests.framework */; };
+		93CA62CB7DA047170622442C /* Pods_TicTacToe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7640BD80A02A70270C09FD2A /* Pods_TicTacToe.framework */; };
 		9C6D6C6D2698C7430056DF58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D6C6C2698C7430056DF58 /* AppDelegate.swift */; };
 		9C6D6C712698C7430056DF58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D6C702698C7430056DF58 /* ViewController.swift */; };
 		9C6D6C762698C7450056DF58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D6C752698C7450056DF58 /* Assets.xcassets */; };
@@ -27,6 +29,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C841583C560CE0BCA4DB792 /* Pods_TicTacToeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TicTacToeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		52E5E36175DB40A06B317FA5 /* Pods-TicTacToe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TicTacToe.release.xcconfig"; path = "Target Support Files/Pods-TicTacToe/Pods-TicTacToe.release.xcconfig"; sourceTree = "<group>"; };
+		7640BD80A02A70270C09FD2A /* Pods_TicTacToe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TicTacToe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		966DF6D09A3A76094A534C35 /* Pods-TicTacToeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TicTacToeTests.debug.xcconfig"; path = "Target Support Files/Pods-TicTacToeTests/Pods-TicTacToeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		977F1C932E3194E61D16DF93 /* Pods-TicTacToe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TicTacToe.debug.xcconfig"; path = "Target Support Files/Pods-TicTacToe/Pods-TicTacToe.debug.xcconfig"; sourceTree = "<group>"; };
 		9C6D6C692698C7430056DF58 /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C6D6C6C2698C7430056DF58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C6D6C702698C7430056DF58 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +47,7 @@
 		9C6D6C902698C7450056DF58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CD5B1522698CEAF00B1E7B2 /* TicTacToe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToe.swift; sourceTree = "<group>"; };
 		9CD5B1562698EB4800B1E7B2 /* Symbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
+		A619672EB3BD967C3EC0DD7C /* Pods-TicTacToeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TicTacToeTests.release.xcconfig"; path = "Target Support Files/Pods-TicTacToeTests/Pods-TicTacToeTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93CA62CB7DA047170622442C /* Pods_TicTacToe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FA072B30973B114DF534EFB /* Pods_TicTacToeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +77,8 @@
 				9C6D6C822698C7450056DF58 /* TicTacToeTests */,
 				9C6D6C8D2698C7450056DF58 /* TicTacToeUITests */,
 				9C6D6C6A2698C7430056DF58 /* Products */,
+				BD5F49E3988E97A6453B60CB /* Pods */,
+				AD3AF3D2455512F316D33407 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -143,6 +155,26 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		AD3AF3D2455512F316D33407 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7640BD80A02A70270C09FD2A /* Pods_TicTacToe.framework */,
+				0C841583C560CE0BCA4DB792 /* Pods_TicTacToeTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BD5F49E3988E97A6453B60CB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				977F1C932E3194E61D16DF93 /* Pods-TicTacToe.debug.xcconfig */,
+				52E5E36175DB40A06B317FA5 /* Pods-TicTacToe.release.xcconfig */,
+				966DF6D09A3A76094A534C35 /* Pods-TicTacToeTests.debug.xcconfig */,
+				A619672EB3BD967C3EC0DD7C /* Pods-TicTacToeTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -150,9 +182,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9C6D6C932698C7450056DF58 /* Build configuration list for PBXNativeTarget "TicTacToe" */;
 			buildPhases = (
+				2CDFC5B47165B20D2EBE1396 /* [CP] Check Pods Manifest.lock */,
 				9C6D6C652698C7430056DF58 /* Sources */,
 				9C6D6C662698C7430056DF58 /* Frameworks */,
 				9C6D6C672698C7430056DF58 /* Resources */,
+				85A9044E65C6179514BCE751 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -167,9 +201,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9C6D6C962698C7450056DF58 /* Build configuration list for PBXNativeTarget "TicTacToeTests" */;
 			buildPhases = (
+				0C86535F51E5A1D0B324B4E6 /* [CP] Check Pods Manifest.lock */,
 				9C6D6C7B2698C7450056DF58 /* Sources */,
 				9C6D6C7C2698C7450056DF58 /* Frameworks */,
 				9C6D6C7D2698C7450056DF58 /* Resources */,
+				E0CE3D0D7A2AA0BF961E3A87 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -236,6 +272,87 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C86535F51E5A1D0B324B4E6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TicTacToeTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2CDFC5B47165B20D2EBE1396 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TicTacToe-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		85A9044E65C6179514BCE751 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TicTacToe/Pods-TicTacToe-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TicTacToe/Pods-TicTacToe-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TicTacToe/Pods-TicTacToe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E0CE3D0D7A2AA0BF961E3A87 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TicTacToeTests/Pods-TicTacToeTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TicTacToeTests/Pods-TicTacToeTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TicTacToeTests/Pods-TicTacToeTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9C6D6C652698C7430056DF58 /* Sources */ = {
@@ -330,7 +447,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -385,7 +502,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -397,14 +514,17 @@
 		};
 		9C6D6C942698C7450056DF58 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 977F1C932E3194E61D16DF93 /* Pods-TicTacToe.debug.xcconfig */;
 			buildSettings = {
 				ALTERNATE_OWNER = "2021-DEV2-047";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TicTacToe/Resources/Info.plist;
 				INSTALL_OWNER = "2021-DEV2-047";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -419,14 +539,17 @@
 		};
 		9C6D6C952698C7450056DF58 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52E5E36175DB40A06B317FA5 /* Pods-TicTacToe.release.xcconfig */;
 			buildSettings = {
 				ALTERNATE_OWNER = "2021-DEV2-047";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TicTacToe/Resources/Info.plist;
 				INSTALL_OWNER = "2021-DEV2-047";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -441,15 +564,16 @@
 		};
 		9C6D6C972698C7450056DF58 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 966DF6D09A3A76094A534C35 /* Pods-TicTacToeTests.debug.xcconfig */;
 			buildSettings = {
 				ALTERNATE_OWNER = "2021-DEV2-047";
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TicTacToeTests/Info.plist;
 				INSTALL_OWNER = "2021-DEV2-047";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -467,15 +591,16 @@
 		};
 		9C6D6C982698C7450056DF58 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A619672EB3BD967C3EC0DD7C /* Pods-TicTacToeTests.release.xcconfig */;
 			buildSettings = {
 				ALTERNATE_OWNER = "2021-DEV2-047";
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TicTacToeTests/Info.plist;
 				INSTALL_OWNER = "2021-DEV2-047";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
