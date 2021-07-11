@@ -24,17 +24,17 @@ class GameViewModel_Tests: XCTestCase {
     // arrange
     let gridContainerFrame = CGRect(x: 0, y: 0, width: 3, height: 3)
     // act
-    vm.getBoxFrames(from: gridContainerFrame)
+    vm.setUpBoxFrames(from: gridContainerFrame)
     // assert
-    XCTAssertEqual(vm.getBox(at: 0).frame, CGRect(x: 0, y: 0, width: 1, height: 1))
-    XCTAssertEqual(vm.getBox(at: 1).frame, CGRect(x: 1, y: 0, width: 1, height: 1))
-    XCTAssertEqual(vm.getBox(at: 2).frame, CGRect(x: 2, y: 0, width: 1, height: 1))
-    XCTAssertEqual(vm.getBox(at: 3).frame, CGRect(x: 0, y: 1, width: 1, height: 1))
-    XCTAssertEqual(vm.getBox(at: 4).frame, CGRect(x: 1, y: 1, width: 1, height: 1))
-    XCTAssertEqual(vm.getBox(at: 5).frame, CGRect(x: 2, y: 1, width: 1, height: 1))
-    XCTAssertEqual(vm.getBox(at: 6).frame, CGRect(x: 0, y: 2, width: 1, height: 1))
-    XCTAssertEqual(vm.getBox(at: 7).frame, CGRect(x: 1, y: 2, width: 1, height: 1))
-    XCTAssertEqual(vm.getBox(at: 8).frame, CGRect(x: 0, y: 2, width: 1, height: 1))
+    XCTAssertEqual(vm.getBox(at: 0), CGRect(x: 0, y: 0, width: 1, height: 1))
+    XCTAssertEqual(vm.getBox(at: 1), CGRect(x: 1, y: 0, width: 1, height: 1))
+    XCTAssertEqual(vm.getBox(at: 2), CGRect(x: 2, y: 0, width: 1, height: 1))
+    XCTAssertEqual(vm.getBox(at: 3), CGRect(x: 0, y: 1, width: 1, height: 1))
+    XCTAssertEqual(vm.getBox(at: 4), CGRect(x: 1, y: 1, width: 1, height: 1))
+    XCTAssertEqual(vm.getBox(at: 5), CGRect(x: 2, y: 1, width: 1, height: 1))
+    XCTAssertEqual(vm.getBox(at: 6), CGRect(x: 0, y: 2, width: 1, height: 1))
+    XCTAssertEqual(vm.getBox(at: 7), CGRect(x: 1, y: 2, width: 1, height: 1))
+    XCTAssertEqual(vm.getBox(at: 8), CGRect(x: 2, y: 2, width: 1, height: 1))
   }
 }
 
