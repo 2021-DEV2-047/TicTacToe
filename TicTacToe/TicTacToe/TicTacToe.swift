@@ -90,20 +90,15 @@ extension TicTacToe {
   }
   
   private func theGameIsEnded() -> Bool {
-    if userHasWon || boardIsFilled() {
-      alertMessage = getMessage(for: winner)
-      return true
-    }
-    return false
+    guard let winner = winner else { return false }
+    alertMessage = getMessage(for: winner)
+    return true
   }
   
-  private func getMessage(for winner: Symbol?) -> String {
-    guard let _winner = winner else {
-      return "The game is not yet over !"
-    }
-    switch _winner {
+  private func getMessage(for winner: Symbol) -> String {
+    switch winner {
     case .circle, .cross:
-      return "\(_winner.rawValue) win the game."
+      return "\(winner.rawValue) win the game."
     case .none:
       return "Draw. The game is over, start a new game."
     }
