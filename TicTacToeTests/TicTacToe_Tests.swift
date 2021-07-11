@@ -112,7 +112,7 @@ class TicTacToe_Tests: XCTestCase {
     XCTAssertEqual(ticTacToe.getAlertMessage(), "X win the game.")
   }
   
-  func test_when_cross_do_a_certain_combination_then_he_should_not_win() {
+  func test_when_user_do_a_certain_combination_then_he_should_not_win() {
     // arrange, act & assert
     XCTAssertEqual(ticTacToe.getAlertMessage(), "The X begin.")
     ticTacToe.addSymbol(toBox: 7)
