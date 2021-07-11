@@ -68,7 +68,7 @@ extension TicTacToe {
   
   private func processBoard() {
     let playerCombinations = getPlayerCombinations()
-    userHasWon = verifyIfUserHasWon(with: playerCombinations)
+    userHasWon = verifyIfUserHasWon(from: playerCombinations)
     
     if userHasWon {
       winner = currentSymbol
@@ -83,7 +83,7 @@ extension TicTacToe {
     }.joined(separator: ",")
   }
   
-  private func verifyIfUserHasWon(with combinations: String) -> Bool {
+  private func verifyIfUserHasWon(from combinations: String) -> Bool {
     winningCombinations.first(where: { combinations.contains($0) }) != nil
   }
   
