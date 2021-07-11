@@ -10,11 +10,11 @@ class TicTacToe {
     "0,4,8", "2,4,7"
   ]
   
-  private var board: [String] = [
+  var board = BehaviorRelay<[String]>(value: [
     "", "", "",
     "", "", "",
     "", "", ""
-  ]
+  ])
   
   var alertMessage = BehaviorRelay<String>(value: "The X begin.")
   
@@ -32,13 +32,16 @@ extension TicTacToe {
       return
     }
     
-    let selectedBox = board[box]
+    let selectedBox = board.value[box]
     guard selectedBox.isEmpty else {
       alertMessage.accept("You cannot play on a played position !")
       return
     }
     
-    board[box] = currentSymbol.rawValue
+    var newBoard = board.value
+    newBoard[box] = currentSymbol.rawValue
+    board.accept(newBoard)
+    
     processBoard()
     
     if theGameIsEnded() {
@@ -50,11 +53,11 @@ extension TicTacToe {
   }
   
   func getBox(_ box: Int) -> String {
-    board[box]
+    board.value[box]
   }
   
   func boardSize() -> Int {
-    board.count
+    board.value.count
   }
   
   func getAlertMessage() -> String {
@@ -78,7 +81,7 @@ extension TicTacToe {
   }
   
   private func getPlayerCombinations() -> String {
-    board.enumerated().compactMap { (index, box) -> String? in
+    board.value.enumerated().compactMap { (index, box) -> String? in
       (box == currentSymbol.rawValue) ? String(index) : nil
     }.joined(separator: ",")
   }
@@ -88,7 +91,7 @@ extension TicTacToe {
   }
   
   private func boardIsFilled() -> Bool {
-    board.first(where: { $0 == "" }) == nil
+    board.value.first(where: { $0 == "" }) == nil
   }
   
   private func theGameIsEnded() -> Bool {

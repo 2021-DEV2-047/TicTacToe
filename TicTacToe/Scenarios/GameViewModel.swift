@@ -5,6 +5,7 @@ import RxSwift
 class GameViewModel {
   
   private let ticTacToe = TicTacToe()
+  
   private var boxFrames: [CGRect] = []
   
   var alertMessage: Observable<String> { ticTacToe.alertMessage.asObservable() }
