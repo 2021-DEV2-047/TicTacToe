@@ -10,13 +10,13 @@ class GameViewModel {
   private var boxFrames: [CGRect] = []
   
   var boxImageViewsRelay = BehaviorRelay<[UIImageView]>(value: [])
-  var retryButtonIsHidden = BehaviorRelay<Bool>(value: true)
   
   var board: Observable<[String]> { ticTacToe.board.asObservable() }
   var alertMessage: Observable<NSAttributedString> { ticTacToe.alertMessage.asObservable() }
+  var retryButtonIsHidden: Observable<Bool> { ticTacToe.resetButtonIsHidden.asObservable() }
 }
 
-// MARK: - Convenience Methods
+// MARK: - Public Methods
 
 extension GameViewModel {
   

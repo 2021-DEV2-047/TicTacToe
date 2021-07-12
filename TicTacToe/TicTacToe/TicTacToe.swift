@@ -5,9 +5,9 @@ import RxSwift
 class TicTacToe {
 
   private let winningCombinations = [
-    "0,1,2", "3,4,5", "6,7,8",
-    "0,3,6", "1,4,7", "2,5,8",
-    "0,4,8", "2,4,6"
+    [0,1,2], [3,4,5], [6,7,8],
+    [0,3,6], [1,4,7], [2,5,8],
+    [0,4,8], [2,4,6]
   ]
   
   var board = BehaviorRelay<[String]>(value: [
@@ -18,6 +18,8 @@ class TicTacToe {
   
   private let attributedString = NSAttributedString(string: R.string.ticTacToe.xBegin(), attributes: Symbol.cross.attributes)
   lazy var alertMessage = BehaviorRelay<NSAttributedString>(value: attributedString)
+  
+  var resetButtonIsHidden = BehaviorRelay<Bool>(value: true)
   
   private var currentSymbol: Symbol = .cross
   private var winner: Symbol? = nil
@@ -69,6 +71,11 @@ extension TicTacToe {
       newBoard[index] = ""
     }
     board.accept(newBoard)
+    resetButtonIsHidden.accept(true)
+    
+    currentSymbol = .cross
+    winner = nil
+    userHasWon = false
   }
 }
 
@@ -87,14 +94,28 @@ extension TicTacToe {
     }
   }
   
-  private func getPlayerCombinations() -> String {
-    board.value.enumerated().compactMap { (index, box) -> String? in
-      (box == currentSymbol.rawValue) ? String(index) : nil
-    }.joined(separator: ",")
+  private func getPlayerCombinations() -> [Int] {
+    board.value.enumerated()
+      .sorted(by: { $0.offset < $1.offset })
+      .compactMap { (index, box) -> Int? in
+        (box == currentSymbol.rawValue) ? index : nil
+      }
   }
   
-  private func verifyIfUserHasWon(from combinations: String) -> Bool {
-    winningCombinations.first(where: { combinations.contains($0) }) != nil
+  private func verifyIfUserHasWon(from combinations: [Int]) -> Bool {
+    var winningArray = [false, false, false]
+    
+    for winningCombination in winningCombinations {
+      for (index, winningNumber) in winningCombination.enumerated() {
+        winningArray[index] = combinations.contains(winningNumber)
+      }
+      
+      if winningArray.elementsEqual([true, true, true]) {
+        break
+      }
+    }
+    
+    return winningArray.elementsEqual([true, true, true])
   }
   
   private func boardIsFilled() -> Bool {
@@ -105,6 +126,7 @@ extension TicTacToe {
     guard let winner = winner else { return false }
     let message = getMessage(for: winner)
     alertMessage.accept(message)
+    resetButtonIsHidden.accept(false)
     return true
   }
   

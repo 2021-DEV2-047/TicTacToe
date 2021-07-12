@@ -84,6 +84,11 @@ class GameViewModel_Tests: XCTestCase {
     // assert
     XCTAssertEqual(alertMessage.value.string, "X win the game")
     XCTAssertEqual(retryButtonIsVisibleRelay.value, false)
+    
+    // act
+    vm.resetGame()
+    XCTAssertEqual(alertMessage.value.string, "The X begin")
+    XCTAssertEqual(retryButtonIsVisibleRelay.value, true)
   }
   
   func test_when_a_game_is_finished_then_retry_button_should_clean_the_board() {

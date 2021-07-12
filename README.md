@@ -30,11 +30,14 @@ The player who succeeds in placing three of their marks in a diagonal, horizonta
   - When nobody win then it's a draw and a message is displayed
   - When the game is finished and players try to play, then retry game message is displayed
   - When a game begin, the alertMessage shows the player that has to play (The X). And then, shows the player who should play at the end of each round.
+  - When a game is finished, then retry button should be displayed (and hidden when a game is ongoing)
+  - Retry button should clean the board
   
 - Tests cover the GameViewModel class:
   - When the game is initialized, then alert message should have the correct message
   - When the game is initialized, then boxFrames should be prepared (they will contain images)
   - When the user press the grid, then the correct symbol should appear in the right box
+  - When a game is finished, then retry button should be displayed (and hidden when a game is ongoing)
 
 # Build & Run
 

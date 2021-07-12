@@ -107,7 +107,7 @@ extension GameViewController {
   private func setUpBindings() {
     vm.alertMessage.bind(to: alertLabel.rx.attributedText).disposed(by: bag)
     
-    vm.board.subscribe { event in
+    vm.board.skip(1).subscribe { event in
       guard let _board = event.element else { return }
       _board.enumerated().forEach { (index, value) in
         if value.isEmpty { return }
@@ -120,6 +120,7 @@ extension GameViewController {
     gridContainer.addGestureRecognizer(tap)
     
     resetButton.addTarget(self, action: #selector(resetGame), for: .touchUpInside)
+    vm.retryButtonIsHidden.bind(to: resetButton.rx.isHidden).disposed(by: bag)
   }
 }
 
@@ -135,7 +136,8 @@ extension GameViewController {
   
   @objc
   private func resetGame() {
-    
+    removeImageViewsFromSuperview()
+    vm.resetGame()
   }
   
   private func setUpConstraintsForSeparators() {
@@ -172,6 +174,19 @@ extension GameViewController {
     vm.setUpBoxImageViews()
     for imageView in vm.boxImageViewsRelay.value {
       gridContainer.addSubview(imageView)
+    }
+  }
+  
+  private func removeImageViewsFromSuperview() {
+    for subview in gridContainer.subviews {
+      if let imageView = subview as? UIImageView {
+        let imageIsACross = imageView.image == R.image.game.cross()
+        let imageIsACircle = imageView.image == R.image.game.circle()
+        
+        if imageIsACross || imageIsACircle {
+          subview.removeFromSuperview()
+        }
+      }
     }
   }
 }
